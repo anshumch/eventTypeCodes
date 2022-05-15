@@ -105,6 +105,7 @@ jobs:
         shell: bash
         run: |
           sam deploy --stack-name ${DEV_STACK_NAME} \
+            --parameter-overrides Stage=dev \
             --capabilities CAPABILITY_IAM \
             --region ${DEV_REGION} \
             --s3-bucket ${DEV_ARTIFACTS_BUCKET} \
@@ -195,6 +196,7 @@ jobs:
       - name: Deploy to testing account
         run: |
           sam deploy --stack-name ${TESTING_STACK_NAME} \
+            --parameter-overrides Stage=test \
             --template packaged-testing.yaml \
             --capabilities CAPABILITY_IAM \
             --region ${TESTING_REGION} \
@@ -240,6 +242,7 @@ jobs:
       - name: Deploy to production account
         run: |
           sam deploy --stack-name ${PROD_STACK_NAME} \
+            --parameter-overrides Stage=prod \
             --template packaged-prod.yaml \
             --capabilities CAPABILITY_IAM \
             --region ${PROD_REGION} \
