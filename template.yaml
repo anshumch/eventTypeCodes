@@ -9,6 +9,13 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+Parameters:
+  Environment:
+    Type: String
+    AllowedValues:
+      - dev
+      - test
+      - prod
 
 Resources:
   lambdaIAMRole:
@@ -63,7 +70,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   eventTypeCodesTypeApi:
     Description: "API Gateway endpoint URL for Prod stage for eventTypeCodesType function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/eventTypeCodesType/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/eventTypeCodesType/"
   eventTypeCodesTypeFunction:
     Description: "eventTypeCodesType Function ARN"
     Value: !GetAtt eventTypeCodesTypeFunction.Arn
